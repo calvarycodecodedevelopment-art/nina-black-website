@@ -48,7 +48,7 @@ function renderProductsInGrid(products, container) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
-            <img src="${product.imageUrl}" alt="${product.name}">
+            <img src="${product.imageUrl}" alt="${product.name}" loading="lazy">
             <h3 class="product-name">${product.name}</h3>
             <p class="product-price">${product.price}</p>
             <button class="add-to-cart-btn" data-product-name="${product.name}">Adicionar ao Carrinho</button>
@@ -153,7 +153,7 @@ class Carousel {
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
             productCard.innerHTML = `
-                <img src="${product.imageUrl}" alt="${product.name}">
+                <img src="${product.imageUrl}" alt="${product.name}" loading="lazy">
                 <h3 class="product-name">${product.name}</h3>
                 <p class="product-price">${product.price}</p>
                 <button class="add-to-cart-btn" data-product-name="${product.name}">Adicionar ao Carrinho</button>
