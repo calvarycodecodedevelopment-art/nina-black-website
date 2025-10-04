@@ -1,0 +1,525 @@
+/* 1. Reset e Variáveis Globais */
+:root {
+    --color-primary: #000000;
+    --color-secondary: #FFFFFF;
+    --color-accent: #D4AF37;
+    --color-text: #333333;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-secondary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 2. Estilos do Header */
+.main-header {
+    background-color: var(--color-secondary);
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.logo img {
+    height: 45px; /* Altura ajustada para a nova logo */
+    width: auto;
+    display: block; 
+}
+
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--color-accent);
+}
+
+.header-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+.header-icons a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+
+/* 3. Seção Hero */
+.hero-section {
+    height: 80vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/site/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-secondary);
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #c8a030;
+}
+
+/* 4. Seção de Categorias */
+.categories-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+.category-name {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--color-secondary);
+    background-color: rgba(0,0,0,0.6);
+    padding: 8px 16px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+/* 5. Estilos do Footer */
+.main-footer {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 40px 0 20px 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-column h4 {
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 10px;
+}
+
+.footer-column a, .social-icons a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover, .social-icons a:hover {
+    color: var(--color-accent);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-copyright {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+/* 6. Seção de Lançamentos / Carrossel */
+.featured-products {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.carousel-container {
+    position: relative;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.product-card {
+    flex: 0 0 25%; /* Desktop: 4 itens visíveis */
+    padding: 0 10px;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.product-card .product-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.product-card .product-price {
+    font-size: 1rem;
+    color: #666;
+    margin: 5px 0 15px 0;
+}
+
+.product-card .add-to-cart-btn {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid var(--color-primary);
+}
+
+.product-card .add-to-cart-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
+}
+
+.carousel-button.prev {
+    left: -20px;
+}
+
+.carousel-button.next {
+    right: -20px;
+}
+
+.carousel-pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none; /* Garante que o botão pareça um ponto */
+}
+
+.pagination-dot.active {
+    background-color: var(--color-primary);
+}
+
+/* 7. Estilos para Notificação Toast */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.toast {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 8. MELHORIAS NO RODAPÉ */
+.footer-grid {
+    align-items: start;
+}
+
+.footer-column .logo {
+    margin-bottom: 1rem;
+}
+
+/* ESTILO ADICIONADO PARA A LOGO NO RODAPÉ */
+.footer-column .logo img {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1); /* Inverte a cor da logo para branco */
+}
+
+.footer-column h4 {
+    color: var(--color-secondary);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column li {
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links svg {
+    fill: var(--color-secondary);
+    transition: fill 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+.social-links a:hover svg {
+    fill: var(--color-accent);
+}
+
+/* 9. Estilos da Página de Coleção Completa */
+.all-products-section {
+    padding: 60px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas em desktop */
+    gap: 20px;
+}
+
+.product-grid .product-card {
+    padding: 0;
+    text-align: center;
+}
+
+/* 10. Seção Sobre Nós */
+.about-us-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.about-us-section p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.8;
+}
+
+.about-us-section .brands {
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+/* 11. Página de Contato */
+.contact-section {
+    padding: 60px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.contact-info p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-form .cta-button {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* 12. Responsividade */
+@media (max-width: 1024px) {
+    .product-card {
+        flex-basis: 50%; /* Tablet: 2 itens visíveis */
+    }
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav { display: none; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .category-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    
+    .product-card {
+        flex-basis: 100%; /* Mobile: 1 item visível */
+    }
+    .carousel-button {
+        top: 40%;
+    }
+    .carousel-button.prev {
+        left: 5px;
+    }
+    .carousel-button.next {
+        right: 5px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr; /* 1 coluna em mobile */
+    }
+    .contact-grid {
+        grid-template-columns: 1fr; /* Formulário abaixo das informações em mobile */
+    }
+}

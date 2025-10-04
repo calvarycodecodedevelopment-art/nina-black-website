@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Kit Silver Scent Jacques Bogart",
+    "price": "R$ 499,90",
+    "imageUrl": "images/perfumes/kit_silver_scent.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Florata Gold 75ml",
+    "price": "R$ 159,90",
+    "imageUrl": "images/perfumes/floratta_gold_75_ml.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Batom Duo Rosado Eudora",
+    "price": "R$ 59,99",
+    "imageUrl": "images/cosmeticos/batom_duo_rosado_eudora.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Cuide-Se Bem Deleite 200ml",
+    "price": "R$ 99,90",
+    "imageUrl": "images/perfumes/cuidese_bem_deleite.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Botica 214 African Sunrise",
+    "price": "R$ 249,90",
+    "imageUrl": "images/perfumes/botica_african_sunrise.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Creme Acetinado Hidratante Desodorante Corporal Lily",
+    "price": "R$ 149,90",
+    "imageUrl": "images/cosmeticos/creme_corporal_lily.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Desodorante Perfume Una Artisan 75 ml",
+    "price": "R$ 319,90",
+    "imageUrl": "images/perfumes/desodorante_una_artisan.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Kit Presente Floratta",
+    "price": "R$ 219,90",
+    "imageUrl": "images/perfumes/kit_presente_floratta.jpg"
+  }
+]
