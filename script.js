@@ -1,3 +1,26 @@
+// --- FUNÇÃO PARA CARREGAR COMPONENTES (HEADER/FOOTER) ---
+function loadComponent(componentPath, targetElementId) {
+    // A função 'fetch' busca o conteúdo do ficheiro (ex: header.html)
+    fetch(componentPath)
+        .then(response => {
+            // Se a resposta não for 'ok' (ex: erro 404, ficheiro não encontrado), gera um erro
+            if (!response.ok) {
+                throw new Error(`Componente não encontrado em: ${componentPath}`);
+            }
+            // Converte a resposta em texto (o código HTML)
+            return response.text();
+        })
+        .then(html => {
+            // Insere o código HTML do componente no elemento de destino (ex: <div id="header-placeholder">)
+            document.getElementById(targetElementId).innerHTML = html;
+        })
+        .catch(error => {
+            // Mostra um erro na consola se algo falhar, para facilitar a depuração
+            console.error(`Erro ao carregar o componente: ${error}`);
+        });
+}
+
+
 // Função reutilizável para criar notificações 'toast'
 function showToast(message) {
     const container = document.getElementById('toast-container');
@@ -8,24 +31,19 @@ function showToast(message) {
     
     container.appendChild(toast);
 
-    // Adiciona a classe 'show' para iniciar a animação de entrada
     setTimeout(() => {
         toast.classList.add('show');
-    }, 10); // Pequeno delay para garantir que a transição CSS funcione
+    }, 10);
 
-    // Remove o toast após 3 segundos
     setTimeout(() => {
         toast.classList.remove('show');
-        // Remove o elemento do DOM após a animação de saída
         toast.addEventListener('transitionend', () => toast.remove());
     }, 3000);
 }
 
 // Função para renderizar produtos numa grelha (reutilizável)
 function renderProductsInGrid(products, container) {
-    // Limpa o container caso já tenha algo
     container.innerHTML = '';
-
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
@@ -38,7 +56,6 @@ function renderProductsInGrid(products, container) {
         container.appendChild(productCard);
     });
 
-    // Adiciona o evento de clique para os botões "Adicionar ao Carrinho" na grelha
     container.addEventListener('click', (event) => {
         if (event.target.classList.contains('add-to-cart-btn')) {
             const productName = event.target.dataset.productName;
@@ -50,15 +67,13 @@ function renderProductsInGrid(products, container) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- CARREGA O HEADER E O FOOTER EM TODAS AS PÁGINAS ---
+    loadComponent('header.html', 'header-placeholder');
+    loadComponent('footer.html', 'footer-placeholder');
+
     // Efeito de fade-in suave para as seções ao rolar a página
     const sectionsToAnimate = document.querySelectorAll('.categories-section, .main-footer, .featured-products, .all-products-section');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -81,28 +96,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (carouselContainer) {
         fetch('products.json')
             .then(response => response.json())
-            .then(products => {
-                new Carousel(carouselContainer, products);
-            })
+            .then(products => new Carousel(carouselContainer, products))
             .catch(error => console.error('Erro ao carregar os produtos para o carrossel:', error));
     }
 
     // --- LÓGICA GENÉRICA PARA GRELHAS DE PRODUTOS ---
-    // Procura por qualquer grelha que precise ser preenchida
     const productGridContainer = document.querySelector('[data-grid-type]');
     if (productGridContainer) {
-        const gridType = productGridContainer.dataset.gridType; // 'all', 'perfumes', 'cosmeticos', etc.
-
+        const gridType = productGridContainer.dataset.gridType;
         fetch('products.json')
             .then(response => response.json())
             .then(products => {
                 let filteredProducts = products;
-                
-                // Se não for para mostrar todos, filtra pela categoria
                 if (gridType !== 'all') {
                     filteredProducts = products.filter(product => product.imageUrl.includes(`/${gridType}/`));
                 }
-                
                 renderProductsInGrid(filteredProducts, productGridContainer);
             })
             .catch(error => console.error(`Erro ao carregar produtos para a grelha '${gridType}':`, error));
@@ -117,10 +125,8 @@ class Carousel {
         this.prevButton = container.querySelector('.carousel-button.prev');
         this.nextButton = container.querySelector('.carousel-button.next');
         this.pagination = container.querySelector('.carousel-pagination');
-        
         this.currentIndex = 0;
         this.autoplayInterval = null;
-        
         this.init();
     }
 
@@ -162,9 +168,7 @@ class Carousel {
             const dot = document.createElement('button');
             dot.className = 'pagination-dot';
             dot.setAttribute('aria-label', `Ir para a página ${i + 1}`);
-            dot.addEventListener('click', () => {
-                this.goToPage(i);
-            });
+            dot.addEventListener('click', () => this.goToPage(i));
             this.pagination.appendChild(dot);
         }
         this.dots = Array.from(this.pagination.children);
@@ -173,17 +177,14 @@ class Carousel {
     addEventListeners() {
         this.prevButton.addEventListener('click', () => this.prevPage());
         this.nextButton.addEventListener('click', () => this.nextPage());
-        
         this.track.addEventListener('click', (event) => {
             if (event.target.classList.contains('add-to-cart-btn')) {
                 const productName = event.target.dataset.productName;
                 showToast(`${productName} foi adicionado ao carrinho!`);
             }
         });
-
         this.container.addEventListener('mouseenter', () => this.stopAutoplay());
         this.container.addEventListener('mouseleave', () => this.startAutoplay());
-
         window.addEventListener('resize', () => {
             this.setupPagination();
             this.updateCarousel();
