@@ -1,21 +1,21 @@
 // --- FUNÇÃO PARA CARREGAR COMPONENTES (HEADER/FOOTER) ---
 function loadComponent(componentPath, targetElementId) {
-    // A função 'fetch' busca o conteúdo do ficheiro (ex: header.html)
-    fetch(componentPath)
+    // ADIÇÃO PARA FORÇAR A ATUALIZAÇÃO (CACHE BUSTING)
+    // Isto adiciona um número único ao final do URL (ex: footer.html?v=1678886400000)
+    // fazendo o navegador pensar que é sempre um ficheiro novo.
+    const cacheBustingUrl = `${componentPath}?v=${new Date().getTime()}`;
+
+    fetch(cacheBustingUrl)
         .then(response => {
-            // Se a resposta não for 'ok' (ex: erro 404, ficheiro não encontrado), gera um erro
             if (!response.ok) {
                 throw new Error(`Componente não encontrado em: ${componentPath}`);
             }
-            // Converte a resposta em texto (o código HTML)
             return response.text();
         })
         .then(html => {
-            // Insere o código HTML do componente no elemento de destino (ex: <div id="header-placeholder">)
             document.getElementById(targetElementId).innerHTML = html;
         })
         .catch(error => {
-            // Mostra um erro na consola se algo falhar, para facilitar a depuração
             console.error(`Erro ao carregar o componente: ${error}`);
         });
 }
